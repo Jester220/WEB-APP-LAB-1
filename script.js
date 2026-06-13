@@ -3,10 +3,12 @@ const projectForm = document.getElementById('projectForm');
 const projectNameInput = document.getElementById('projectName');
 const projectTechSelect = document.getElementById('projectTech');
 const tableBody = document.getElementById('tableBody');
+const studentIdInput = document.getElementById('studentId');
 
 // Error Selectors
 const nameError = document.getElementById('nameError');
 const techError = document.getElementById('techError');
+const idError = document.getElementById('idError');
 
 // 2. Event Listener for Form Submission
 projectForm.addEventListener('submit', function (event) {
@@ -14,12 +16,20 @@ projectForm.addEventListener('submit', function (event) {
     event.preventDefault();
 
     // Fetch values and clear whitespace trailing ends
+    const idValue = studentIdInput.value.trim();
     const nameValue = projectNameInput.value.trim();
     const techValue = projectTechSelect.value;
 
     let isValid = true;
 
     // 3. Form Validation Logic
+    if (idValue === '') {
+        idError.textContent = 'Student ID is required.';
+        isValid = false;
+    } else {
+    idError.textContent = '';
+    }
+
     if (nameValue === '') {
         nameError.textContent = 'Project Title is required.';
         isValid = false;
@@ -36,7 +46,7 @@ projectForm.addEventListener('submit', function (event) {
 
     // 4. DOM Manipulation: If Valid, Add to Table View
     if (isValid) {
-        addProjectToTable(nameValue, techValue);
+        addProjectToTable(idValue,nameValue, techValue);
         
         // Form Reset utility
         projectForm.reset();
@@ -44,16 +54,20 @@ projectForm.addEventListener('submit', function (event) {
 });
 
 // 5. Function to dynamically build and insert structural elements
-function addProjectToTable(name, tech) {
+function addProjectToTable(studentId,name, tech) {
     // Create container row element
     const row = document.createElement('tr');
 
     // Create custom structural columns
+    const idCell = document.createElement('td');
+    idCell.textContent = studentId;
+
     const nameCell = document.createElement('td');
     nameCell.textContent = name;
 
     const techCell = document.createElement('td');
     techCell.textContent = tech;
+
 
     const statusCell = document.createElement('td');
     statusCell.innerHTML = `<span class="status-badge">Active</span>`;
@@ -71,6 +85,7 @@ function addProjectToTable(name, tech) {
     actionCell.appendChild(deleteBtn);
 
     // Append table record elements explicitly to the wrapper row container
+    row.appendChild(idCell);
     row.appendChild(nameCell);
     row.appendChild(techCell);
     row.appendChild(statusCell);
