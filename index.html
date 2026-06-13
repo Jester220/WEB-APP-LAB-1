@@ -12,16 +12,23 @@
         <h1>Project Prototype Hub</h1>
         <p>Track and manage your web application ideas</p>
     </header>
+   
 
     <main class="container">
         <section class="form-section">
             <h2>Add New Project</h2>
             <form id="projectForm">
                 <div class="form-group">
+                  <label for="studentId">Student ID:</label>
+                  <input type="text" id="studentId" placeholder="e.g., 241-35-087">
+                  <small class="error-msg" id="idError"></small>
+                 </div>
+                <div class="form-group">
                     <label for="projectName">Project Title:</label>
                     <input type="text" id="projectName" placeholder="e.g., E-Commerce Platform">
                     <small class="error-msg" id="nameError"></small>
                 </div>
+
 
                 <div class="form-group">
                     <label for="projectTech">Core Technology:</label>
@@ -30,6 +37,11 @@
                         <option value="React">React Node Ecosystem</option>
                         <option value="Vanilla JS">Vanilla JavaScript</option>
                         <option value="NextJS">Next.js Framework</option>
+                        <option value="Java"> Java</option>
+                        <option value="Php">PHP</option>
+                        <option value="C++">C++</option>
+                        <option value="Flutter">Flutter</option>
+                        <option value="Django">Django</option>
                     </select>
                     <small class="error-msg" id="techError"></small>
                 </div>
@@ -44,6 +56,7 @@
                 <table id="projectTable">
                     <thead>
                         <tr>
+                            <th>Student ID</th>
                             <th>Project Name</th>
                             <th>Technology</th>
                             <th>Status</th>
@@ -52,6 +65,7 @@
                     </thead>
                     <tbody id="tableBody">
                         <tr>
+                            <td>241-35-087</td>
                             <td>Example Seed Project</td>
                             <td>Vanilla JS</td>
                             <td><span class="status-badge">Active</span></td>
